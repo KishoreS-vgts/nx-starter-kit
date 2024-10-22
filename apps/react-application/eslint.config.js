@@ -4,8 +4,6 @@ const baseConfig = require('../../eslint.config.js')
 
 module.exports = [
   ...baseConfig,
-
-  ...baseConfig,
   ...nx.configs['flat/react'],
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
