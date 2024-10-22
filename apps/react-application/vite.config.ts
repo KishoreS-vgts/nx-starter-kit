@@ -21,7 +21,8 @@ export default defineConfig({
   //  plugins: [ nxViteTsPaths() ],
   // },
   build: {
-    outDir: '../../dist/apps/react-application',
+    // outDir: '../../dist/apps/react-application',
+    outDir : "./dist/react-application",
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
