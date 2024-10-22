@@ -1,4 +1,4 @@
-const nx = require('@nx/eslint-plugin');
+const nx = require('@nx/eslint-plugin')
 
 module.exports = [
   ...nx.configs['flat/base'],
@@ -12,6 +12,7 @@ module.exports = [
     rules: {
       '@nx/enforce-module-boundaries': [
         'error',
+
         {
           enforceBuildableLibDependency: true,
           allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
@@ -19,6 +20,10 @@ module.exports = [
             {
               sourceTag: '*',
               onlyDependOnLibsWithTags: ['*'],
+            },
+            {
+              sourceTag: 'type:shared-ui',
+              onlyDependOnLibsWithTags: ['type:shared-ui', 'scope:utils'],
             },
           ],
         },
@@ -30,4 +35,4 @@ module.exports = [
     // Override or add rules here
     rules: {},
   },
-];
+]

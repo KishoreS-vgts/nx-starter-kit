@@ -20,6 +20,10 @@ module.exports = [
               sourceTag: '*',
               onlyDependOnLibsWithTags: ['*'],
             },
+            {
+              sourceTag: 'type:shared-ui',
+              onlyDependOnLibsWithTags: ['type:shared-ui', 'scope:utils'],
+            },
           ],
         },
       ],
