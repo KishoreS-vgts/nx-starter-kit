@@ -7,7 +7,9 @@ interface ICardProps {
 }
 export function Card({ children, className }: ICardProps) {
   return (
-    <div className={cn('w-52 h-52 p-2 rounded-lg shadow-md', className)}>
+    <div
+      className={cn('min-w-52 min-h-52 p-2 rounded-lg shadow-md', className)}
+    >
       {children}
     </div>
   )
