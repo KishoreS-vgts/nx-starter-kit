@@ -1,11 +1,16 @@
+import { cn } from '@react-monorepo/utils'
 import React, { type ReactNode } from 'react'
 
 interface ICardProps {
   children: ReactNode
   className?: string
 }
-export function Card({ children }: ICardProps) {
-  return <div className="w-52 h-52 p-2 rounded-lg shadow-md">{children}</div>
+export function Card({ children, className }: ICardProps) {
+  return (
+    <div className={cn('w-52 h-52 p-2 rounded-lg shadow-md', className)}>
+      {children}
+    </div>
+  )
 }
 
 export default React.memo(Card)

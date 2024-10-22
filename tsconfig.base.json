@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@react-monorepo/store": ["store/index.ts"],
-      "@react-monorepo/ui": ["ui/src/index.ts"]
+      "@react-monorepo/ui": ["ui/src/index.ts"],
+      "@react-monorepo/utils": ["utils/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
