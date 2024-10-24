@@ -87,3 +87,5 @@ And join the Nx community:
   }, - in your settings.json
 
 - Install Extenstion
+
+## If it's a shared library make sure the file contains export not default export
