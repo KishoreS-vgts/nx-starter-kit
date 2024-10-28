@@ -1,10 +1,13 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useUserProfile } from '@react-monorepo/core-provider'
-import { cn } from '@react-monorepo/core-utils'
-import { TextInput } from 'core-ui/src'
 import { useEffect } from 'react'
+
 import { FieldValues, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+
+import { useUserProfile } from '@react-monorepo/core-provider'
+import { cn } from '@react-monorepo/core-utils'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { TextInput } from 'core-ui/src'
 
 import { getInitialRoute } from '../route-middleware'
 import { loginValidationSchema } from '../validationSchema/login.validation'

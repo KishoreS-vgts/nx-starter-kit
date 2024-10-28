@@ -1,11 +1,14 @@
-import { useUserProfile } from '@react-monorepo/core-provider'
 import { Suspense, lazy } from 'react'
+
 import {
   Navigate,
   Route,
   BrowserRouter as Router,
   Routes,
 } from 'react-router-dom'
+
+import { useUserProfile } from '@react-monorepo/core-provider'
+import { Loader } from '@react-monorepo/core-ui'
 
 import { PrivateRoutes } from './ProtectedRoutes'
 import NotFound from './pages/404.page'
@@ -17,13 +20,7 @@ const DashBoard = lazy(() => import('./pages/DashBoard.page'))
 
 export default function App() {
   return (
-    <Suspense
-      fallback={
-        <div className="h-screen flex justify-center items-center">
-          Loading...
-        </div>
-      }
-    >
+    <Suspense fallback={<Loader />}>
       <Router>
         <RoleBasedRoutes />
       </Router>

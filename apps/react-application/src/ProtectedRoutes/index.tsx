@@ -1,5 +1,6 @@
-import { useUserProfile } from '@react-monorepo/core-provider'
 import { Navigate, Outlet } from 'react-router-dom'
+
+import { useUserProfile } from '@react-monorepo/core-provider'
 
 export const PrivateRoutes = ({ role = '' }: { role: string }) => {
   const data = useUserProfile((state) => state.data)
