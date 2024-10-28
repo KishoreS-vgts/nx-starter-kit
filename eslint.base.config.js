@@ -10,6 +10,14 @@ module.exports = [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
+      // 'jsx-a11y': [
+      //   2,
+      //   {
+      //     'jsx-a11y/aria-role': 'warn',
+      //     allowedInvalidRoles: ['text'],
+      //     ignoreNonDOM: true,
+      //   },
+      // ],
       '@nx/enforce-module-boundaries': [
         'error',
         {
