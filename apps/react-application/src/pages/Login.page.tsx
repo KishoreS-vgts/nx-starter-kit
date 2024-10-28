@@ -1,43 +1,55 @@
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { TextInput } from '@react-monorepo/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { loginValidationSchema } from '../../validationSchema/login.validation'
-import { cn, ls } from '@react-monorepo/utils'
+import { loginValidationSchema } from '../validationSchema/login.validation'
+import { cn } from '@react-monorepo/utils'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-
+import { getInitialRoute } from '../route-middleware'
+import { useUserProfile } from '@react-monorepo/store'
 export default function Login() {
   const {
     register,
     handleSubmit,
-    control,
-    formState: { errors, isSubmitting, isSubmitted },
-  } = useForm({
+    formState: { errors, isSubmitting },
+  } = useForm<FieldValues>({
     resolver: zodResolver(loginValidationSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   })
   const navigate = useNavigate()
+  const data = useUserProfile((state) => state.data)
+  const addItem = useUserProfile((state) => state.addItem)
 
-  // mimic the API call
-  async function onSubmit(data: any) {
+  // mimic API call
+  async function onSubmit(data: FieldValues) {
     try {
-      await new Promise((resolve) => {
+      const response = await new Promise((resolve) => {
         setTimeout(() => {
-          console.log(data)
-          ls.set('auth', JSON.stringify(data))
-          navigate('/dashboard')
+          // presisiting in localstorage
+          addItem({
+            email: data.email,
+            isAuthenticated: true,
+            role: 'user',
+          })
           resolve(true)
-        }, 3000)
+        }, 2000)
       })
+      if (response) {
+        // navigate(getInitialRoute(user_data.role))
+      }
     } catch (error) {
       console.error('Error during form submission', error)
     }
   }
 
   useEffect(() => {
-    if (ls.isloggedIn()) {
-      navigate('/dashboard')
+    if (data.isAuthenticated && data.role) {
+      navigate(getInitialRoute(data.role))
     }
-  }, [ls.isloggedIn()])
+  }, [data, navigate])
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -61,6 +73,7 @@ export default function Login() {
             type="email"
             register={register}
             error={errors}
+            placeholder="Enter your email"
           />
 
           <TextInput
@@ -72,6 +85,7 @@ export default function Login() {
             register={register}
             link
             linkContent="Forgot your password?"
+            placeholder="Enter your password"
             error={errors}
           />
 
@@ -92,7 +106,7 @@ export default function Login() {
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{' '}
           <a
-            href="#"
+            href="/register"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Create an account
