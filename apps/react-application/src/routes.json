@@ -1,0 +1,13 @@
+{
+  "login": "/login",
+  "admin": {
+    "dashboard": "/admin/dashboard",
+    "profile": "/admin/profile"
+  },
+  "users": {
+    "dashboard": "/dashboard",
+    "profile": "/profile"
+  },
+  "root": "/",
+  "notFound": "*"
+}
