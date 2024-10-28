@@ -1,6 +1,12 @@
-import { FieldError, FieldErrors, UseFormRegister } from 'react-hook-form'
+import {
+  FieldError,
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+} from 'react-hook-form'
 
-export interface ITextInputProps {
+export interface ITextInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string
   name: string
   type: string
@@ -9,8 +15,8 @@ export interface ITextInputProps {
   label: string
   link?: boolean
   linkContent?: string
-  register: UseFormRegister<any>
-  error: FieldErrors<any>
+  register: UseFormRegister<FieldValues>
+  error: FieldErrors<FieldValues>
 }
 
 export function TextInput({
@@ -33,7 +39,7 @@ export function TextInput({
         {link && (
           <div className="text-sm">
             <a
-              href="#"
+              href={linkContent}
               className="font-semibold text-indigo-600 hover:text-indigo-500"
             >
               {linkContent}
@@ -50,7 +56,7 @@ export function TextInput({
       </div>
       {error && error[rest.name || rest.id] && (
         <span className="error-message absolute text-xs text-red-500 my-1">
-          {String((error[rest.name || rest.id] as FieldError)?.message) ??
+          {(error[rest.name || rest.id] as FieldError)?.message ??
             'Error message'}
         </span>
       )}
