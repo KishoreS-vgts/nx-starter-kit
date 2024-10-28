@@ -1,5 +1,5 @@
 {
-  "name": "@react-monorepo/ui",
+  "name": "@react-monorepo/core-ui",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",

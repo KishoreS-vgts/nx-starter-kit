@@ -71,3 +71,7 @@ npm add --global nx@latest
 - Install Extenstion
 
 ## If it's a shared library make sure the file contains export not default export
+
+## Generating libarary command
+
+- nx g lib {name of the library}

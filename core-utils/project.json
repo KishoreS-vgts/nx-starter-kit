@@ -1,7 +1,7 @@
 {
-  "name": "utils",
+  "name": "core-utils",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "utils/src",
+  "sourceRoot": "core-utils",
   "projectType": "library",
   "targets": {
     "build": {
@@ -15,6 +15,6 @@
       }
     }
   },
-  "tags": ["type:feature", "scope:utils"],
-  "// targets": "to see all targets run: nx show project utils --web"
+  "tags": ["type:feature", "scope:core-utils"],
+  "// targets": "to see all targets run: nx show project core-utils --web"
 }

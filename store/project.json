@@ -1,8 +1,0 @@
-{
-  "name": "store",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "store/src",
-  "projectType": "library",
-  "tags": ["type:feature", "scope:store"],
-  "// targets": "to see all targets run: nx show project store --web"
-}

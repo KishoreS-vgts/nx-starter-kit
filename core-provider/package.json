@@ -1,5 +1,5 @@
 {
-  "name": "@react-monorepo/store",
+  "name": "@react-monorepo/core-provider",
   "version": "0.0.1",
   "dependencies": {},
   "private": true

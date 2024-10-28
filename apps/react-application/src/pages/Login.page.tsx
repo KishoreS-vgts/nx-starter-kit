@@ -1,12 +1,14 @@
-import { FieldValues, useForm } from 'react-hook-form'
-import { TextInput } from '@react-monorepo/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { loginValidationSchema } from '../validationSchema/login.validation'
-import { cn } from '@react-monorepo/utils'
-import { useNavigate } from 'react-router-dom'
+import { useUserProfile } from '@react-monorepo/core-provider'
+import { cn } from '@react-monorepo/core-utils'
+import { TextInput } from 'core-ui/src'
 import { useEffect } from 'react'
+import { FieldValues, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
 import { getInitialRoute } from '../route-middleware'
-import { useUserProfile } from '@react-monorepo/store'
+import { loginValidationSchema } from '../validationSchema/login.validation'
+
 export default function Login() {
   const {
     register,
@@ -19,6 +21,7 @@ export default function Login() {
       password: '',
     },
   })
+
   const navigate = useNavigate()
   const data = useUserProfile((state) => state.data)
   const addItem = useUserProfile((state) => state.addItem)
@@ -32,7 +35,7 @@ export default function Login() {
           addItem({
             email: data.email,
             isAuthenticated: true,
-            role: 'user',
+            role: 'admin',
           })
           resolve(true)
         }, 2000)

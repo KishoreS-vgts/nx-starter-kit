@@ -1,14 +1,15 @@
-import { lazy, Suspense } from 'react'
+import { useUserProfile } from '@react-monorepo/core-provider'
+import { Suspense, lazy } from 'react'
 import {
+  Navigate,
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
-  Navigate,
 } from 'react-router-dom'
-import ErrorPage from './pages/Error.Page'
-import NotFound from './pages/404.page'
+
 import { PrivateRoutes } from './ProtectedRoutes'
-import { useUserProfile } from '@react-monorepo/store'
+import NotFound from './pages/404.page'
+import ErrorPage from './pages/Error.Page'
 import routePaths from './routes.json'
 
 const Login = lazy(() => import('./pages/Login.page'))
