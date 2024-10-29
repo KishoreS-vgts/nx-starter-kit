@@ -1,0 +1,9 @@
+{
+  "name": "core-form-schema-validation",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "core-form-schema-validation/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project core-form-schema-validation --web",
+  "targets": {}
+}

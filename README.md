@@ -75,3 +75,7 @@ npm add --global nx@latest
 ## Generating libarary command
 
 - nx g lib {name of the library}
+
+## Build all the lib and application
+
+nx run-many --target=build --all

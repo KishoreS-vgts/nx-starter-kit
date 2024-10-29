@@ -15,10 +15,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@react-monorepo/core-form-schema-validation": [
+        "core-form-schema-validation/src/index.ts"
+      ],
       "@react-monorepo/core-provider": ["core-provider/index.ts"],
+      "@react-monorepo/core-tools": ["core-tools/index.ts"],
       "@react-monorepo/core-ui": ["core-ui/src/index.ts"],
-      "@react-monorepo/core-utils": ["core-utils/index.ts"],
-      "@react-monorepo/core-tools": ["core-tools/index.ts"]
+      "@react-monorepo/core-utils": ["core-utils/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
