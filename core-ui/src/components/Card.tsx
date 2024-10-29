@@ -1,6 +1,6 @@
 import React, { type ReactNode } from 'react'
 
-import { cn } from '@react-monorepo/utils'
+import { cn } from '@react-monorepo/core-utils'
 
 interface ICardProps {
   children: ReactNode
