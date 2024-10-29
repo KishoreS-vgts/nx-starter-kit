@@ -79,3 +79,7 @@ npm add --global nx@latest
 ## Build all the lib and application
 
 nx run-many --target=build --all
+
+## Build only affected branch
+
+nx affected --target=build
