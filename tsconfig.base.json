@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "jsx": "preserve",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -20,8 +21,10 @@
       ],
       "@react-monorepo/core-provider": ["core-provider/index.ts"],
       "@react-monorepo/core-tools": ["core-tools/index.ts"],
+      "@react-monorepo/core-types": ["core-type/index.ts"],
       "@react-monorepo/core-ui": ["core-ui/src/index.ts"],
-      "@react-monorepo/core-utils": ["core-utils/index.ts"]
+      "@react-monorepo/core-utils": ["core-utils/index.ts"],
+      "@react-monorepo/core-hooks": ["core-hooks/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
