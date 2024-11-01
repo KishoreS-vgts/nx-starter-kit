@@ -1,5 +1,4 @@
 // based on the role we need to render the initial route if they visit the login page
-import routePaths from './routes.json'
 
 const ROLES = ['admin', 'user', 'manager', 'sales']
 
@@ -9,6 +8,16 @@ export const getInitialRoute = (role: string) => {
   }
   return initRouters(role)
 }
+export const routePaths = {
+  root: '/',
+  users: {
+    dashboard: '/user/dashboard',
+  },
+  admin: {
+    dashboard: '/dashboard',
+  },
+}
+
 export const initRouters = (role: string): string => {
   switch (role) {
     case 'admin':
