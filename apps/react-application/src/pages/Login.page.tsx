@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
 
-import { FieldValues, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { loginValidationSchema } from '@react-monorepo/core-form-schema-validation'
-import { useUserProfile } from '@react-monorepo/core-provider'
-import { TextInput } from '@react-monorepo/core-ui'
-import { cn } from '@react-monorepo/core-utils'
+import { useAuthAndProfile } from '@react-monorepo/core-hooks'
+import { useUserStore } from '@react-monorepo/core-provider'
+import { type LoginType } from '@react-monorepo/core-types'
+import { Button, TextInput } from '@react-monorepo/core-ui'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -17,46 +18,29 @@ export default function Login() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FieldValues>({
+  } = useForm<LoginType>({
     resolver: zodResolver(loginValidationSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   })
-
   const navigate = useNavigate()
-  const data = useUserProfile((state) => state.data)
-  const addItem = useUserProfile((state) => state.addItem)
+  // import custom hook for login
+  const { isLoading, mutate } = useAuthAndProfile()
+  const role = useUserStore((state) => state.role)
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated)
 
-  // mimic API call
-  async function onSubmit(data: FieldValues) {
-    try {
-      const response = await new Promise((resolve) => {
-        setTimeout(() => {
-          // presisiting in localstorage
-          addItem({
-            email: data.email,
-            isAuthenticated: true,
-            role: 'admin',
-          })
-          resolve(true)
-        }, 2000)
-      })
-      if (response) {
-        // navigate(getInitialRoute(user_data.role))
-      }
-    } catch (error) {
-      console.error('Error during form submission', error)
-    }
+  async function onSubmit(data: LoginType) {
+    await mutate(data)
   }
 
+  //  initial routing redirection
   useEffect(() => {
-    if (data.isAuthenticated && data.role) {
-      navigate(getInitialRoute(data.role))
+    if (isAuthenticated && role) {
+      navigate(getInitialRoute(role))
     }
-  }, [data, navigate])
-
+  }, [role, isAuthenticated, navigate])
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -94,19 +78,9 @@ export default function Login() {
             placeholder="Enter your password"
             error={errors}
           />
-
-          <div>
-            <button
-              disabled={isSubmitting}
-              type="submit"
-              className={cn(
-                'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
-                { 'cursor-not-allowed opacity-50': isSubmitting }
-              )}
-            >
-              Sign in
-            </button>
-          </div>
+          <Button isSubmitting={isSubmitting} loading={isLoading}>
+            Sign in
+          </Button>
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
