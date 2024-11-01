@@ -1,80 +1,47 @@
-import { Suspense, lazy } from 'react'
+import { Suspense } from 'react'
 
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from 'react-router-dom'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
-import { useUserProfile } from '@react-monorepo/core-provider'
+import { useUserStore } from '@react-monorepo/core-provider'
+import { Route as RouteType } from '@react-monorepo/core-types'
 import { Loader } from '@react-monorepo/core-ui'
 
 import { PrivateRoutes } from './ProtectedRoutes'
-import NotFound from './pages/404.page'
-import ErrorPage from './pages/Error.Page'
-import routePaths from './routes.json'
-
-const Login = lazy(() => import('./pages/Login.page'))
-const DashBoard = lazy(() => import('./pages/DashBoard.page'))
+import { appRoutes } from './routeConfig'
 
 export default function App() {
+  const { role } = useUserStore((state) => state)
+
+  const filterRoutes = (routes: RouteType[]) => {
+    if (!role) {
+      return routes
+    }
+    return routes.filter((route) => route.roles.includes(role))
+  }
+
   return (
     <Suspense fallback={<Loader />}>
       <Router>
-        <RoleBasedRoutes />
+        <Routes>
+          {filterRoutes(appRoutes).map((route) =>
+            route.protected ? (
+              <Route
+                element={<PrivateRoutes role={role} />}
+                key={route.path}
+                path={route.path}
+              >
+                <Route element={route.element} path={route.path} />
+              </Route>
+            ) : (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            )
+          )}
+        </Routes>
       </Router>
     </Suspense>
-  )
-}
-
-function RoleBasedRoutes() {
-  const userRole = useUserProfile((state) => state.data).role
-  console.log(userRole)
-
-  return (
-    <Routes>
-      <Route
-        path={routePaths.root}
-        element={<Navigate to={routePaths.login} replace />}
-      />
-      <Route path={routePaths.login} element={<Login />} />
-
-      {/* Role-based routes */}
-      {userRole === 'admin' ? (
-        <Route element={<PrivateRoutes role="admin" />} key="admin-dashboard">
-          <Route
-            path={routePaths.admin.dashboard}
-            element={<div>Admin Dashboard</div>}
-            errorElement={<ErrorPage />}
-          />
-          <Route
-            path={routePaths.admin.profile}
-            element={<div>Admin Profile</div>}
-            errorElement={<ErrorPage />}
-          />
-        </Route>
-      ) : userRole === 'user' ? (
-        <Route element={<PrivateRoutes role="user" />} key="dashboard">
-          <Route
-            path={routePaths.users.dashboard}
-            element={<DashBoard />}
-            errorElement={<ErrorPage />}
-          />
-          <Route
-            path={routePaths.users.profile}
-            element={<div>User Profile</div>}
-            errorElement={<ErrorPage />}
-          />
-        </Route>
-      ) : (
-        <Route
-          path={routePaths.notFound}
-          element={<Navigate to={routePaths.login} replace />}
-        />
-      )}
-
-      <Route path={routePaths.notFound} element={<NotFound />} />
-    </Routes>
   )
 }
