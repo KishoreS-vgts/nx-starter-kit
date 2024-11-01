@@ -1,2 +1,2 @@
-export * from './slices/useUser'
-export * from './slices/useUserProfile'
+export * from './query-provider'
+export * from './slices/useUserStore'
