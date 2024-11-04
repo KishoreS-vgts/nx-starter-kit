@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import React, { Suspense, useMemo } from 'react'
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 
@@ -12,34 +12,44 @@ import { appRoutes } from './routeConfig'
 export default function App() {
   const { role } = useUserStore((state) => state)
 
-  const filterRoutes = (routes: RouteType[]) => {
-    if (!role) {
-      return routes
-    }
-    return routes.filter((route) => route.roles.includes(role))
-  }
+  const filteredRoutes: RouteType[] = useMemo(
+    () =>
+      role
+        ? appRoutes.filter((route) => route.roles.includes(role))
+        : appRoutes,
+    [role]
+  )
 
   return (
     <Suspense fallback={<Loader />}>
       <Router>
         <Routes>
-          {filterRoutes(appRoutes).map((route) =>
-            route.protected ? (
+          {filteredRoutes.map((route) => {
+            const Element = route.element
+            const Layout = route.layout || React.Fragment
+
+            const WrappedElement = (
+              <Layout>
+                <Element />
+              </Layout>
+            )
+
+            return route.protected ? (
               <Route
                 element={<PrivateRoutes role={role} />}
                 key={route.path}
                 path={route.path}
               >
-                <Route element={route.element} path={route.path} />
+                <Route element={WrappedElement} path={route.path} />
               </Route>
             ) : (
               <Route
                 key={route.path}
                 path={route.path}
-                element={route.element}
+                element={WrappedElement}
               />
             )
-          )}
+          })}
         </Routes>
       </Router>
     </Suspense>
