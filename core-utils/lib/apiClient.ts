@@ -1,6 +1,6 @@
 export async function apiClient(endpoint: string, options: RequestInit = {}) {
   const token =
-    localStorage.length > 0
+    localStorage.length > 0 && localStorage['userStore']
       ? JSON.parse(localStorage['userStore']).state.authToken
       : null
 
