@@ -1,4 +1,15 @@
 {
   "Welcome to React": "Bienvenue sur React et react-i18next",
-  "adminDashboard": "<0>Ceci est le tableau de bord de <strong>l'administrateur</strong></0>"
+  "adminDashboard": "<0>Ceci est le tableau de bord de <strong>l'administrateur</strong></0>",
+  "signin": {
+    "title": "Connectez-vous à votre compte",
+    "email": "E-mail",
+    "email_placeholder": "Entrez votre e-mail",
+    "password": "Mot de passe",
+    "forgot_password": "Mot de passe oublié ?",
+    "password_placeholder": "Entrez votre mot de passe",
+    "button": "Se connecter",
+    "not_a_member": "Pas encore membre ?",
+    "create_account": "Créer un compte"
+  }
 }

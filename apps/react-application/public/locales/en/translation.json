@@ -1,4 +1,15 @@
 {
   "Welcome to React": "Welcome to React and react-i18next",
-  "adminDashboard": "<0>This is <strong>admin's</strong> dashboard</0>"
+  "adminDashboard": "<0>This is <strong>admin's</strong> dashboard</0>",
+  "signin": {
+    "title": "Sign in to your account",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "password": "Password",
+    "forgot_password": "Forgot your password?",
+    "password_placeholder": "Enter your password",
+    "button": "Sign in",
+    "not_a_member": "Not a member?",
+    "create_account": "Create an account"
+  }
 }

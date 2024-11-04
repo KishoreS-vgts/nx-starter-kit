@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
 import { loginValidationSchema } from '@react-monorepo/core-form-schema-validation'
@@ -26,6 +27,7 @@ export default function Login() {
     },
   })
   const navigate = useNavigate()
+  const { t } = useTranslation()
   // import custom hook for login
   const { isLoading, mutate } = useAuthAndProfile()
   const role = useUserStore((state) => state.role)
@@ -45,12 +47,12 @@ export default function Login() {
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
-          alt="Your Company"
+          alt={t('companyLogoAlt', { defaultValue: 'Your Company' })}
           src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
           className="mx-auto h-10 w-auto"
         />
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          Sign in to your account
+          {t('signin.title')}
         </h2>
       </div>
 
@@ -59,37 +61,37 @@ export default function Login() {
           <TextInput
             name="email"
             id="email"
-            label="Email"
+            label={t('signin.email')}
             type="email"
             register={register}
             error={errors}
-            placeholder="Enter your email"
+            placeholder={t('signin.email_placeholder')}
           />
 
           <TextInput
             name="password"
             id="password"
-            label="Password"
+            label={t('signin.password')}
             type="password"
             autoComplete="current-password"
             register={register}
             link
-            linkContent="Forgot your password?"
-            placeholder="Enter your password"
+            linkContent={t('signin.forgot_password')}
+            placeholder={t('signin.password_placeholder')}
             error={errors}
           />
           <Button isSubmitting={isSubmitting} loading={isLoading}>
-            Sign in
+            {t('signin.button')}
           </Button>
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          Not a member?{' '}
+          {t('signin.not_a_member')}{' '}
           <a
             href="/register"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
-            Create an account
+            {t('signin.create_account')}
           </a>
         </p>
       </div>

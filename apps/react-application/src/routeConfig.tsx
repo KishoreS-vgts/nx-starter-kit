@@ -15,6 +15,7 @@ export const appRoutes: Route[] = [
     path: '/login',
     element: Login,
     roles: ['user', 'admin'],
+    layout: Layout,
   },
   {
     path: '*',
